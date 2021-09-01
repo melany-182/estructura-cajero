@@ -28,6 +28,6 @@ public class Main {
         	Cuenta cuenta3c3=new Cuenta("Carlos Gomez","cgomez","3333","332233","Bolivianos","Caja de Ahorros",100000);
         	cuentas.add(cuenta3c3);
         	
-        Cajero.login(clientes,cuentas,0);
+        Cajero.login(clientes,cuentas,-1);
     }
 }
