@@ -36,6 +36,19 @@ public class Cuenta extends Cliente {
 	public void setSaldo(double saldo) {
 		this.saldo=saldo;
 	}
+	
+	public String toString() {
+		StringBuilder sb=new StringBuilder();                                                                   
+        sb.append("\nNúmero de cuenta: ");
+        sb.append(getNumero());
+        sb.append("\nMoneda de la cuenta: ");
+        sb.append(getMoneda());
+        sb.append("\nTipo de cuenta: ");
+        sb.append(getTipo());
+        sb.append("\nSaldo actual: ");
+        sb.append(getSaldo());
+        return sb.toString();
+	}
 
 	public void doRetiro() {
 		try {

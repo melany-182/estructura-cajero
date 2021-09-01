@@ -61,7 +61,8 @@ public class Cliente {
 					for (int i=0; i<cuentasClienteActual.size(); i++) {
 						if ((i+1)==opcion1) {
 							flag=1;
-							System.out.println("\nSaldo actual: "+cuentasClienteActual.get(i).getSaldo()+" "+cuentasClienteActual.get(i).getMoneda()+"\n");
+							System.out.println(cuentasClienteActual.get(i).toString()+"\n");
+							//System.out.println("\nSaldo actual: "+cuentasClienteActual.get(i).getSaldo()+" "+cuentasClienteActual.get(i).getMoneda()+"\n");
 							break;
 						}
 					}
