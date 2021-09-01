@@ -92,7 +92,7 @@ public class Cajero {
 				else {
 					ingresos[i]=false;
 				}
-				System.out.println(ingresos[i]);
+				//System.out.println(ingresos[i]);
 			}
 			//scanner.close(); ---> esto genera una excepción. Por qué???
 			clientes.get(aux).menuPrincipal(clientes,cuentas,cuentasClienteActual,ingresos,aux);
