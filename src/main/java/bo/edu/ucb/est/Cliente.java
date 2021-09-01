@@ -37,7 +37,7 @@ public class Cliente {
         return sb.toString();
 	}
 	
-	public void menuPrincipal(ArrayList<Cuenta> cuentasClienteActual) {
+	public void menuPrincipal(ArrayList<Cliente> clientes,ArrayList<Cuenta> cuentas,ArrayList<Cuenta> cuentasClienteActual) {
 		try {
 			for (;;) {
 				System.out.println("------- MENÚ PRINCIPAL -------");
@@ -116,7 +116,7 @@ public class Cliente {
 				case 4: {
 					System.out.println("\n¡Hasta pronto!\n\n•\n•\n•\n");
 					//scanner.close();
-					Main.login();
+					Cajero.login(clientes,cuentas,1);
 				}
 				default: System.out.println("\nNúmero ingresado inválido.\n"); break;
 			    }
@@ -125,7 +125,7 @@ public class Cliente {
 		}
 		catch (InputMismatchException e) {
 			System.out.println("\nNo puede ingresar un valor que no sea un número entero. Error: "+e+"\n");
-			menuPrincipal(cuentasClienteActual);
+			menuPrincipal(clientes,cuentas,cuentasClienteActual);
 		}
 	}
 }

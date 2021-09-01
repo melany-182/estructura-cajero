@@ -1,11 +1,10 @@
 package bo.edu.ucb.est;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Main {
 	public static ArrayList<Cliente>clientes=new ArrayList<Cliente>();
 	public static ArrayList<Cuenta>cuentas=new ArrayList<Cuenta>();
-	public static ArrayList<Cuenta>cuentasClienteActual=new ArrayList<Cuenta>();
+	
     public static void main(String[] args) {
     	
         Cliente cliente1=new Cliente("Juan Perez","jperez","3333");
@@ -28,45 +27,7 @@ public class Main {
         	cuentas.add(cuenta2c3);
         	Cuenta cuenta3c3=new Cuenta("Carlos Gomez","cgomez","3333","332233","Bolivianos","Caja de Ahorros",100000);
         	cuentas.add(cuenta3c3);
-  
-       login();
+        	
+        Cajero.login(clientes,cuentas,0);
     }
-    
-    public static void login() { // sin orientación a objetos
-    	int flag=0;
-    	int aux=0;
-		String codigo;
-		String pin;
-		@SuppressWarnings("resource")
-		Scanner scanner=new Scanner(System.in);
-		System.out.print("Ingrese su código de cliente: "); codigo=scanner.nextLine();
-		System.out.print("Ingrese su pin de seguridad: "); pin=scanner.nextLine();
-		for (int i=0; i<clientes.size(); i++) {
-			if ((clientes.get(i).getCodigo()).equals(codigo) && (clientes.get(i).getPin()).equals(pin)) {
-				flag=1;
-				aux=i;
-				for (int j=0; j<cuentas.size(); j++) {
-		        	if ((clientes.get(aux).getCodigo()).equals(cuentas.get(j).getCodigo())) {
-		        		cuentasClienteActual.add(cuentas.get(j));
-		        	}
-				}
-				break;
-			}
-			else {
-				flag=0;
-			}
-		}
-		
-		if (flag==0) {
-			System.out.print("\nEl código de cliente y el pin de seguridad no coinciden. Intente de nuevo.\n\n");
-			//scanner.close();
-			Main.login();
-		}
-		else {
-			System.out.print("\nAcceso permitido.\n\n");
-			//scanner.close(); ---> esto genera una excepción. Por qué???
-			clientes.get(aux).menuPrincipal(cuentasClienteActual);
-		}
-		//scanner.close();
-	}
 }
