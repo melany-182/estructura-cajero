@@ -54,7 +54,7 @@ public class Cuenta extends Cliente {
 		try {
 			@SuppressWarnings("resource")
 			Scanner scanner=new Scanner(System.in);
-			System.out.print("\nIngrese la cantidad a retirar (en "+getMoneda()+": "); double retiro=scanner.nextDouble();
+			System.out.print("\nIngrese la cantidad a retirar (en "+getMoneda()+"): "); double retiro=scanner.nextDouble();
 			if (retiro>0 && retiro<=getSaldo()) {
 				setSaldo(saldo-retiro);
 				//saldo=saldo-retiro;
@@ -77,7 +77,7 @@ public class Cuenta extends Cliente {
 		try {
 			@SuppressWarnings("resource")
 			Scanner scanner=new Scanner(System.in);
-			System.out.print("\nIngrese la cantidad a depositar (en "+getMoneda()+": "); double deposito=scanner.nextDouble();
+			System.out.print("\nIngrese la cantidad a depositar (en "+getMoneda()+"): "); double deposito=scanner.nextDouble();
 			if (deposito>0) {
 				setSaldo(saldo+deposito);
 				System.out.println("\nTransacción realizada exitosamente.\n");
