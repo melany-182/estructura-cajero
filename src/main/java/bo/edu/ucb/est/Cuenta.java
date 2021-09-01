@@ -1,5 +1,6 @@
 package bo.edu.ucb.est;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Cuenta extends Cliente {
@@ -37,34 +38,47 @@ public class Cuenta extends Cliente {
 	}
 
 	public void doRetiro() {
-		@SuppressWarnings("resource")
-		Scanner scanner=new Scanner(System.in);
-		System.out.print("\nIngrese la cantidad a retirar: "); String ret=scanner.next();
-		double retiro=Double.valueOf(ret);
-		if (retiro>0 && retiro<=getSaldo()) {
-			setSaldo(saldo-retiro);
-			//saldo=saldo-retiro;
-			System.out.println("\nTransacción realizada exitosamente.\n");
-			System.out.println("Nuevo saldo: "+getSaldo()+" "+getMoneda()+"\n");
+		try {
+			@SuppressWarnings("resource")
+			Scanner scanner=new Scanner(System.in);
+			System.out.print("\nIngrese la cantidad a retirar: "); double retiro=scanner.nextDouble();
+			if (retiro>0 && retiro<=getSaldo()) {
+				setSaldo(saldo-retiro);
+				//saldo=saldo-retiro;
+				System.out.println("\nTransacción realizada exitosamente.\n");
+				System.out.println("Nuevo saldo: "+getSaldo()+" "+getMoneda()+"\n");
+			}
+			else { //if (retiro==0 || retiro<0 || retiro>getSaldo()) {
+				System.out.println("\nEl valor ingresado no es válido. Ingrese un monto diferente.\n");
+				//doRetiro();
+			}
+			//scanner.close(); ---> esto genera una excepción. Por qué???
 		}
-		else { //if (retiro==0 || retiro<0 || retiro>getSaldo()) {
-			System.out.println("\nEl valor ingresado no es válido. Ingrese un monto diferente.\n");
-			//doRetiro();
+		catch (InputMismatchException e) {
+			System.out.println("\nNo puede ingresar un valor que no sea un número real. Error: "+e);
+			doRetiro();
 		}
-		//scanner.close(); ---> esto genera una excepción. Por qué???
 	}
 	
-	/*public void doDeposito() {
-		Scanner scanner=new Scanner(System.in);
-		System.out.print("\nIngrese la cantidad a depositar: "); double deposito=scanner.nextDouble();
-		if (deposito==0 || deposito<0) {
-			System.out.println("\nEl valor ingresado no es válido. Ingrese un monto diferente.\n");
+	public void doDeposito() {
+		try {
+			@SuppressWarnings("resource")
+			Scanner scanner=new Scanner(System.in);
+			System.out.print("\nIngrese la cantidad a depositar: "); double deposito=scanner.nextDouble();
+			if (deposito>0) {
+				setSaldo(saldo+deposito);
+				System.out.println("\nTransacción realizada exitosamente.\n");
+				System.out.println("Nuevo saldo: "+getSaldo()+" "+getMoneda()+"\n");
+			}
+			else { // if (deposito==0 || deposito<0) {
+				System.out.println("\nEl valor ingresado no es válido. Ingrese un monto diferente.\n");
+				//doDeposito();
+			}
+			//scanner.close(); ---> esto genera una excepción. Por qué???
+		}
+		catch (InputMismatchException e) {
+			System.out.println("\nNo puede ingresar un valor que no sea un número real. Error: "+e);
 			doDeposito();
 		}
-		else {
-			saldo=saldo+deposito;
-			System.out.println("\nTransacción realizada exitosamente.\n");
-		}
-		scanner.close();
-	}*/
+	}
 }

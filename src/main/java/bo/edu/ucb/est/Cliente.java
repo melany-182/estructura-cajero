@@ -1,5 +1,6 @@
 package bo.edu.ucb.est;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Cliente {
@@ -37,20 +38,21 @@ public class Cliente {
 	}
 	
 	public void menuPrincipal(ArrayList<Cuenta> cuentasClienteActual) {
-		for (;;) {
-			System.out.println("------- MENÚ PRINCIPAL -------");
-			System.out.println("1. Ver saldo");
-			System.out.println("2. Realizar retiro");
-			System.out.println("3. Realizar depósito");
-			System.out.println("4. Salir");
-			Scanner scanner=new Scanner(System.in);
-			int opcion0=0;
-			System.out.print("\nIngrese una opción: ");
-			opcion0=scanner.nextInt();
-			try {
+		try {
+			for (;;) {
+				System.out.println("------- MENÚ PRINCIPAL -------");
+				System.out.println("1. Ver saldo");
+				System.out.println("2. Realizar retiro");
+				System.out.println("3. Realizar depósito");
+				System.out.println("4. Salir");
+				int flag=0;
+				@SuppressWarnings("resource")
+				Scanner scanner=new Scanner(System.in);
+				int opcion0=0;
+				System.out.print("\nIngrese una opción: ");
+				opcion0=scanner.nextInt();
 				switch (opcion0) {
 				case 1: {
-					int flag=0;
 					System.out.println("\nSELECCIONE UNA DE SUS CUENTAS");
 					for (int i=0; i<cuentasClienteActual.size(); i++) {
 						System.out.println((i+1)+". Cuenta "+cuentasClienteActual.get(i).getNumero());
@@ -64,13 +66,12 @@ public class Cliente {
 						}
 					}
 					if (flag==0) {
-						System.out.println("\nNúmero ingresado inválido.\n");
+						System.out.println("\nEl número de cuenta no existe.\n");
 					}
 					//scanner.close();
 					break;
 				}
 				case 2: {
-					int flag=0;
 					System.out.println("\nSELECCIONE UNA DE SUS CUENTAS");
 					for (int i=0; i<cuentasClienteActual.size(); i++) {
 						System.out.println((i+1)+". Cuenta "+cuentasClienteActual.get(i).getNumero());
@@ -86,28 +87,45 @@ public class Cliente {
 						}
 					}
 					if (flag==0) {
-						System.out.println("\nNúmero ingresado inválido.\n");
+						System.out.println("\nEl número de cuenta no existe.\n");
 					}
 					//scanner.close();
 					break;
 				}
 				case 3: {
+					System.out.println("\nSELECCIONE UNA DE SUS CUENTAS");
+					for (int i=0; i<cuentasClienteActual.size(); i++) {
+						System.out.println((i+1)+". Cuenta "+cuentasClienteActual.get(i).getNumero());
+					}
+					System.out.print("\nIngrese una opción: "); int opcion3=scanner.nextInt();
+					for (int i=0; i<cuentasClienteActual.size(); i++) {
+						if ((i+1)==opcion3) {
+							flag=1;
+							System.out.println("\nSaldo actual: "+cuentasClienteActual.get(i).getSaldo()+" "+cuentasClienteActual.get(i).getMoneda());
+							cuentasClienteActual.get(i).doDeposito(); // DEPOSITO
+							//scanner.close();
+							break;
+						}
+					}
+					if (flag==0) {
+						System.out.println("\nEl número de cuenta no existe.\n");
+					}
 					//scanner.close();
 					break;
 				}
 				case 4: {
-					System.out.println("\n¡Hasta pronto!\n");
+					System.out.println("\n¡Hasta pronto!\n\n•\n•\n•\n");
 					//scanner.close();
 					Main.login();
 				}
-				default: System.out.println("\nNúmero ingresado inválido.\n"); /*scanner.close();*/ break;
-		        }
-			//scanner.close();
-			}
-			catch (Exception e) {
-				System.out.println("Error: "+e);
+				default: System.out.println("\nNúmero ingresado inválido.\n"); break;
+			    }
+				//scanner.close();
 			}
 		}
-		//scanner.close();
+		catch (InputMismatchException e) {
+			System.out.println("\nNo puede ingresar un valor que no sea un número entero. Error: "+e+"\n");
+			menuPrincipal(cuentasClienteActual);
+		}
 	}
 }
