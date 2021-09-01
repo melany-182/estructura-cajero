@@ -37,6 +37,7 @@ public class Main {
     	int aux=0;
 		String codigo;
 		String pin;
+		@SuppressWarnings("resource")
 		Scanner scanner=new Scanner(System.in);
 		System.out.print("Ingrese su código de cliente: "); codigo=scanner.nextLine();
 		System.out.print("Ingrese su pin de seguridad: "); pin=scanner.nextLine();
@@ -58,12 +59,14 @@ public class Main {
 		
 		if (flag==0) {
 			System.out.print("\nEl código de cliente y el pin de seguridad no coinciden. Intente de nuevo.\n\n");
-			login();
+			//scanner.close();
+			Main.login();
 		}
 		else {
 			System.out.print("\nAcceso permitido.\n\n");
+			//scanner.close(); ---> esto genera una excepción. Por qué???
 			clientes.get(aux).menuPrincipal(cuentasClienteActual);
 		}
-		scanner.close();
+		//scanner.close();
 	}
 }

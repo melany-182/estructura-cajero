@@ -44,19 +44,20 @@ public class Cliente {
 			System.out.println("3. Realizar depósito");
 			System.out.println("4. Salir");
 			Scanner scanner=new Scanner(System.in);
-			String opcion0=null;
-			System.out.print("\nIngrese una opción: "); opcion0=scanner.nextLine();
-			
-			switch (opcion0) {
-				case "1": {
+			int opcion0=0;
+			System.out.print("\nIngrese una opción: ");
+			opcion0=scanner.nextInt();
+			try {
+				switch (opcion0) {
+				case 1: {
 					int flag=0;
 					System.out.println("\nSELECCIONE UNA DE SUS CUENTAS");
 					for (int i=0; i<cuentasClienteActual.size(); i++) {
 						System.out.println((i+1)+". Cuenta "+cuentasClienteActual.get(i).getNumero());
 					}
-					System.out.print("\nIngrese una opción: "); String opcion1=scanner.nextLine();
+					System.out.print("\nIngrese una opción: "); int opcion1=scanner.nextInt();
 					for (int i=0; i<cuentasClienteActual.size(); i++) {
-						if ((i+1)==Integer.valueOf(opcion1)) {
+						if ((i+1)==opcion1) {
 							flag=1;
 							System.out.println("\nSaldo actual: "+cuentasClienteActual.get(i).getSaldo()+" "+cuentasClienteActual.get(i).getMoneda()+"\n");
 							break;
@@ -65,43 +66,47 @@ public class Cliente {
 					if (flag==0) {
 						System.out.println("\nNúmero ingresado inválido.\n");
 					}
+					//scanner.close();
 					break;
 				}
-				case "2": {
+				case 2: {
 					int flag=0;
 					System.out.println("\nSELECCIONE UNA DE SUS CUENTAS");
 					for (int i=0; i<cuentasClienteActual.size(); i++) {
 						System.out.println((i+1)+". Cuenta "+cuentasClienteActual.get(i).getNumero());
 					}
-					System.out.print("\nIngrese una opción: "); String opcion2=scanner.nextLine();
+					System.out.print("\nIngrese una opción: "); int opcion2=scanner.nextInt();
 					for (int i=0; i<cuentasClienteActual.size(); i++) {
-						if ((i+1)==Integer.valueOf(opcion2)) {
+						if ((i+1)==opcion2) {
 							flag=1;
 							System.out.println("\nSaldo actual: "+cuentasClienteActual.get(i).getSaldo()+" "+cuentasClienteActual.get(i).getMoneda());
 							cuentasClienteActual.get(i).doRetiro(); // RETIRO
-							scanner.close();
-							//break;
+							//scanner.close();
+							break;
 						}
 					}
 					if (flag==0) {
 						System.out.println("\nNúmero ingresado inválido.\n");
 					}
+					//scanner.close();
 					break;
 				}
-				case "3": {
-					
+				case 3: {
+					//scanner.close();
 					break;
 				}
-				case "4": {
+				case 4: {
 					System.out.println("\n¡Hasta pronto!\n");
 					//scanner.close();
 					Main.login();
 				}
-				default: System.out.println("\nNúmero ingresado inválido.\n"); break;
-				
-				//scanner.close();
-		    }
-			scanner.close();
+				default: System.out.println("\nNúmero ingresado inválido.\n"); /*scanner.close();*/ break;
+		        }
+			//scanner.close();
+			}
+			catch (Exception e) {
+				System.out.println("Error: "+e);
+			}
 		}
 		//scanner.close();
 	}

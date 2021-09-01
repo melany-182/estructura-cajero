@@ -37,6 +37,7 @@ public class Cuenta extends Cliente {
 	}
 
 	public void doRetiro() {
+		@SuppressWarnings("resource")
 		Scanner scanner=new Scanner(System.in);
 		System.out.print("\nIngrese la cantidad a retirar: "); String ret=scanner.next();
 		double retiro=Double.valueOf(ret);
@@ -50,7 +51,7 @@ public class Cuenta extends Cliente {
 			System.out.println("\nEl valor ingresado no es válido. Ingrese un monto diferente.\n");
 			//doRetiro();
 		}
-		scanner.close();
+		//scanner.close(); ---> esto genera una excepción. Por qué???
 	}
 	
 	/*public void doDeposito() {
