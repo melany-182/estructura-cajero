@@ -54,7 +54,7 @@ public class Cuenta extends Cliente {
 		try {
 			@SuppressWarnings("resource")
 			Scanner scanner=new Scanner(System.in);
-			System.out.print("\nIngrese la cantidad a retirar: "); double retiro=scanner.nextDouble();
+			System.out.print("\nIngrese la cantidad a retirar (en "+getMoneda()+": "); double retiro=scanner.nextDouble();
 			if (retiro>0 && retiro<=getSaldo()) {
 				setSaldo(saldo-retiro);
 				//saldo=saldo-retiro;
@@ -63,7 +63,7 @@ public class Cuenta extends Cliente {
 			}
 			else { //if (retiro==0 || retiro<0 || retiro>getSaldo()) {
 				System.out.println("\nEl valor ingresado no es válido. Ingrese un monto diferente.\n");
-				//doRetiro();
+				doRetiro();
 			}
 			//scanner.close(); ---> esto genera una excepción. Por qué???
 		}
@@ -77,7 +77,7 @@ public class Cuenta extends Cliente {
 		try {
 			@SuppressWarnings("resource")
 			Scanner scanner=new Scanner(System.in);
-			System.out.print("\nIngrese la cantidad a depositar: "); double deposito=scanner.nextDouble();
+			System.out.print("\nIngrese la cantidad a depositar (en "+getMoneda()+": "); double deposito=scanner.nextDouble();
 			if (deposito>0) {
 				setSaldo(saldo+deposito);
 				System.out.println("\nTransacción realizada exitosamente.\n");
@@ -85,7 +85,7 @@ public class Cuenta extends Cliente {
 			}
 			else { // if (deposito==0 || deposito<0) {
 				System.out.println("\nEl valor ingresado no es válido. Ingrese un monto diferente.\n");
-				//doDeposito();
+				doDeposito();
 			}
 			//scanner.close(); ---> esto genera una excepción. Por qué???
 		}
